@@ -4,8 +4,8 @@
 
 int main() {
 
-  dvcxx::pmr::device_malloc_free_memory_resource r;
-  dvcxx::pmr::device_segregated_memory_resource  sr( 2 * 1024, 128, &r );
+  auto r = dvcxx::pmr::device_malloc_free_resource();
+  dvcxx::pmr::device_segregated_memory_resource  sr( 2 * 1024, 128, r );
   dvcxx::pmr::device_polymorphic_allocator<double> alloc( &sr );
 
   double* ptr1 = alloc.allocate( 33 );

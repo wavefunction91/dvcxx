@@ -53,16 +53,19 @@ bool umfmr::do_is_equal( const host_memory_resource& other ) const noexcept {
 
 
 
-device_memory_resource& umfmr::as_device_memory_resource() noexcept {
+//device_memory_resource& umfmr::as_device_memory_resource() noexcept {
+//
+//  return static_cast<device_memory_resource&>(*this);
+//
+//}
+//
+//host_memory_resource& umfmr::as_host_memory_resource() noexcept {
+//
+//  return static_cast<host_memory_resource&>(*this);
+//
+//}
 
-  return static_cast<device_memory_resource&>(*this);
-
+umfmr* unified_malloc_free_resource() {
+  return unified_malloc_free_memory_resource::get_instance();
 }
-
-host_memory_resource& umfmr::as_host_memory_resource() noexcept {
-
-  return static_cast<host_memory_resource&>(*this);
-
-}
-
 }

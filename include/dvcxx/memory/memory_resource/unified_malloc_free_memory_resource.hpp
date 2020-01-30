@@ -13,13 +13,29 @@ class unified_malloc_free_memory_resource :
   bool  do_is_equal( const device_memory_resource& other ) const noexcept;
   bool  do_is_equal( const host_memory_resource& other ) const noexcept;
 
-  device_memory_resource& as_device_memory_resource() noexcept; 
-  const device_memory_resource& as_device_memory_resource() const noexcept;
+  unified_malloc_free_memory_resource() noexcept = default;
 
-  host_memory_resource& as_host_memory_resource() noexcept;
-  const host_memory_resource& as_host_memory_resource() const noexcept;
+public:
 
+  //device_memory_resource& as_device_memory_resource() noexcept; 
+  //const device_memory_resource& as_device_memory_resource() const noexcept;
+
+  //host_memory_resource& as_host_memory_resource() noexcept;
+  //const host_memory_resource& as_host_memory_resource() const noexcept;
+
+  unified_malloc_free_memory_resource( const unified_malloc_free_memory_resource& )         = delete;
+  unified_malloc_free_memory_resource( unified_malloc_free_memory_resource&&     ) noexcept = delete;
+
+  void operator=( const unified_malloc_free_memory_resource& )         = delete;
+  void operator=( unified_malloc_free_memory_resource&&     ) noexcept = delete;
+
+  static unified_malloc_free_memory_resource* get_instance() noexcept {
+    static unified_malloc_free_memory_resource r;
+    return &r;
+  }
 };
+
+unified_malloc_free_memory_resource* unified_malloc_free_resource();
 
 }
 

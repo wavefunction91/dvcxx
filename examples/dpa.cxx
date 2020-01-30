@@ -4,8 +4,8 @@
 
 int main() {
 
-  dvcxx::pmr::device_malloc_free_memory_resource r;
-  dvcxx::pmr::device_polymorphic_allocator<double> alloc( &r );
+  auto r = dvcxx::pmr::device_malloc_free_resource();
+  dvcxx::pmr::device_polymorphic_allocator<double> alloc( r );
 
   double* ptr = alloc.allocate( 10 );
   alloc.deallocate( ptr, 10 );
