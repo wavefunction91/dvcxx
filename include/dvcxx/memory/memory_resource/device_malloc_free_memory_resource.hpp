@@ -19,10 +19,7 @@ public:
   void operator=( const device_malloc_free_memory_resource& )         = delete;
   void operator=( device_malloc_free_memory_resource&&     ) noexcept = delete;
 
-  static device_malloc_free_memory_resource* get_instance() noexcept {
-    static device_malloc_free_memory_resource r;
-    return &r;
-  }
+  static device_malloc_free_memory_resource* get_instance() noexcept;
 
 };
 

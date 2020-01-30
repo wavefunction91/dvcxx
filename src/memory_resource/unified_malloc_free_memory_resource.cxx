@@ -65,6 +65,11 @@ bool umfmr::do_is_equal( const host_memory_resource& other ) const noexcept {
 //
 //}
 
+umfmr* umfmr::get_instance() noexcept {
+  static umfmr r;
+  return &r;
+}
+
 umfmr* unified_malloc_free_resource() {
   return unified_malloc_free_memory_resource::get_instance();
 }

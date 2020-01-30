@@ -29,10 +29,7 @@ public:
   void operator=( const unified_malloc_free_memory_resource& )         = delete;
   void operator=( unified_malloc_free_memory_resource&&     ) noexcept = delete;
 
-  static unified_malloc_free_memory_resource* get_instance() noexcept {
-    static unified_malloc_free_memory_resource r;
-    return &r;
-  }
+  static unified_malloc_free_memory_resource* get_instance() noexcept;
 };
 
 unified_malloc_free_memory_resource* unified_malloc_free_resource();

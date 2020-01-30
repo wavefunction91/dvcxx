@@ -19,10 +19,7 @@ public:
   void operator=( const pinned_malloc_free_memory_resource& )         = delete;
   void operator=( pinned_malloc_free_memory_resource&&     ) noexcept = delete;
 
-  static pinned_malloc_free_memory_resource* get_instance() noexcept {
-    static pinned_malloc_free_memory_resource r;
-    return &r;
-  }
+  static pinned_malloc_free_memory_resource* get_instance() noexcept;
 
 };
 

@@ -31,6 +31,11 @@ bool pmfmr::do_is_equal( const host_memory_resource& other ) const noexcept {
 
 }
 
+pmfmr* pmfmr::get_instance() noexcept {
+  static pmfmr r;
+  return &r;
+}
+
 host_memory_resource* pinned_malloc_free_resource() {
   return static_cast<host_memory_resource*>(pinned_malloc_free_memory_resource::get_instance());
 }

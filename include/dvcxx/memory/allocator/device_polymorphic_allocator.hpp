@@ -1,5 +1,6 @@
 #pragma once
 #include <dvcxx/memory/memory_resource/device_memory_resource.hpp>
+#include <dvcxx/memory/memory_resource/defaults.hpp>
 #include "no_construct_allocator.hpp"
 
 namespace dvcxx::pmr {
@@ -15,8 +16,9 @@ public:
 
   using value_type = T;
 
-  device_polymorphic_allocator( ) noexcept = delete;
   device_polymorphic_allocator( dmr* r ) : resource_(r) { }
+  device_polymorphic_allocator( ) noexcept :
+    device_polymorphic_allocator( get_default_device_resource() ) { }
 
   device_polymorphic_allocator( const device_polymorphic_allocator& )
     noexcept = default;

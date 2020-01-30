@@ -36,6 +36,13 @@ bool dmfmr::do_is_equal( const device_memory_resource& other ) const noexcept {
 
 
 
+dmfmr* dmfmr::get_instance() noexcept {
+  static dmfmr r;
+  return &r;
+}
+
+
+
 device_memory_resource* device_malloc_free_resource() {
   return static_cast<device_memory_resource*>(device_malloc_free_memory_resource::get_instance());
 }

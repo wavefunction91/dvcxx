@@ -1,4 +1,5 @@
 #include <dvcxx/memory/memory_resource/typedefs.hpp>
+#include <dvcxx/memory/memory_resource/defaults.hpp>
 #include <algorithm>
 #include <cassert>
 
@@ -15,6 +16,32 @@ inline size_t div_ceil( size_t n, size_t m ) {
   auto div = std::div( (long long)n, (long long)m );
   return div.quot + !!div.rem;
 }
+
+
+
+
+
+template <class UpstreamResource>
+UpstreamResource* get_default_resource();
+
+template<>
+pmr::device_memory_resource* get_default_resource() {
+  return pmr::get_default_device_resource();
+}
+
+template<>
+pmr::host_memory_resource* get_default_resource() {
+#if __has_include(<memory_resource>)
+  return std::pmr::get_default_resource();
+#else
+  return std::experimental::pmr::get_default_resource();
+#endif
+}
+
+
+
+
+
 
 }
 
@@ -36,6 +63,16 @@ segregated_memory_resource<UpstreamResource>::segregated_memory_resource(
   add_block( mem_blocks_.begin() );
 
 }
+
+
+
+template <class UpstreamResource>
+segregated_memory_resource<UpstreamResource>::segregated_memory_resource(
+  std::size_t      nalloc,
+  std::size_t      block_size
+) : segregated_memory_resource( 
+      nalloc, block_size, detail::get_default_resource<UpstreamResource>() 
+    ) { }
 
 template <class UpstreamResource>
 segregated_memory_resource<UpstreamResource>::~segregated_memory_resource()
